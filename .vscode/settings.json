@@ -1,0 +1,35 @@
+{
+  "dotnet.defaultSolution": "International_Calendar.sln",
+  "cSpell.words": [
+    "ASPNETCORE",
+    "Autoincrement",
+    "datepicker",
+    "devkit",
+    "hmac",
+    "HMACSHA",
+    "uuidv"
+  ],
+  "files.exclude": {
+    "**/.git": true,
+    "**/.svn": true,
+    "**/.hg": true,
+    "**/CVS": true,
+    "**/.DS_Store": true,
+    "**/Thumbs.db": true,
+    "API/International_Calendar.db-wal": true,
+    "API/International_Calendar.db-shm": true,
+    "API/obj": true,
+    "API/bin": true,
+    "client/node_modules": true,
+    "client/.angular": true
+  },
+  "explorerExclude.backup": {},
+  "editor.autoClosingBrackets": "always",
+  "editor.defaultFormatter": "rvest.vs-code-prettier-eslint",
+  "editor.formatOnPaste": false, // required
+  "editor.formatOnType": false, // required
+  "editor.formatOnSave": true, // optional
+  "editor.formatOnSaveMode": "file", // required to format on save
+  // "files.autoSave": "onFocusChange", // optional but recommended
+  "vs-code-prettier-eslint.prettierLast": false // set as "true" to run 'prettier' last not first
+}

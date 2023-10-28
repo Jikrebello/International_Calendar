@@ -1,0 +1,39 @@
+<nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
+  <div class="container">
+    <a class="navbar-brand">International Calendar</a>
+
+    <div class="dropdown" *ngIf="accountService.currentUser$ | async" dropdown>
+      <a class="dropdown-toggle text-light text-decoration-none" dropdownToggle
+        >Welcome {{ userModel?.name }}</a
+      >
+      <div class="dropdown-menu" *dropdownMenu>
+        <a class="dropdown-item">Edit Profile</a>
+        <a class="dropdown-item" (click)="logOut()">Logout</a>
+      </div>
+    </div>
+
+    <form
+      *ngIf="!(accountService.currentUser$ | async)"
+      #loginForm="ngForm"
+      class="d-flex"
+      (ngSubmit)="login()"
+      autocomplete="off"
+    >
+      <input
+        name="emailAddress"
+        [(ngModel)]="formModel.emailAddress"
+        class="form-control me-2"
+        type="text"
+        placeholder="Email Address"
+      />
+      <input
+        name="password"
+        [(ngModel)]="formModel.password"
+        class="form-control me-2"
+        type="password"
+        placeholder="Password"
+      />
+      <button class="btn btn-outline-success" type="submit">Login</button>
+    </form>
+  </div>
+</nav>
