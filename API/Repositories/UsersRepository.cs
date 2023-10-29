@@ -15,14 +15,14 @@ namespace API.Repositories
 
         public async Task<User> GetByIdAsync(Guid id)
         {
-            return await _dataContext.Users.SingleOrDefaultAsync(x => x.Id == id);
+            return await _dataContext.Users.AsNoTracking().SingleOrDefaultAsync(x => x.Id == id);
         }
 
         public async Task<User> GetByEmailAddressAsync(string emailAddress)
         {
-            return await _dataContext.Users.SingleOrDefaultAsync(
-                x => x.EmailAddress == emailAddress
-            );
+            return await _dataContext.Users
+                .AsNoTracking()
+                .SingleOrDefaultAsync(x => x.EmailAddress == emailAddress);
         }
 
         public IAsyncEnumerable<User> GetAllAsync()

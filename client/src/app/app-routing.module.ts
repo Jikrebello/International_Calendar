@@ -4,6 +4,8 @@ import { authGuard } from "./_guards/auth.guard";
 import { CalendarComponent } from "./components/calendar/calendar.component";
 import { DashboardComponent } from "./components/dashboard/dashboard.component";
 import { HomeComponent } from "./components/home/home.component";
+import { NotFoundComponent } from "./shared/errors/not-found/not-found.component";
+import { ServerErrorComponent } from "./shared/errors/server-error/server-error.component";
 
 const routes: Routes = [
   { path: "", component: HomeComponent },
@@ -22,7 +24,9 @@ const routes: Routes = [
       },
     ],
   },
-  { path: "**", component: HomeComponent, pathMatch: "full" },
+  { path: "not-found", component: NotFoundComponent },
+  { path: "server-error", component: ServerErrorComponent },
+  { path: "**", component: NotFoundComponent, pathMatch: "full" },
 ];
 
 @NgModule({

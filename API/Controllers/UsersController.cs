@@ -19,22 +19,14 @@ public class UsersController : BaseApiController
     public async Task<ActionResult<UserDTO>> GetUserById(Guid id)
     {
         var result = await _usersService.GetByIdAsync(id);
-        if (result.Success)
-        {
-            return Ok(result);
-        }
-        return NotFound(new { result.Message });
+        return Ok(result);
     }
 
     [HttpGet(template: "{emailAddress}")]
     public async Task<ActionResult<UserDTO>> GetUserByEmailAddress(string emailAddress)
     {
         var result = await _usersService.GetByEmailAddressAsync(emailAddress);
-        if (result.Success)
-        {
-            return Ok(result);
-        }
-        return NotFound(new { result.Message });
+        return Ok(result);
     }
 
     [HttpGet]
@@ -42,23 +34,15 @@ public class UsersController : BaseApiController
     public async Task<IActionResult> GetAllUsers()
     {
         var result = await _usersService.GetAllAsync();
-        if (result.Success)
-        {
-            return Ok(result);
-        }
-        return NotFound(new { result.Message });
+        return Ok(result);
     }
 
     [HttpPost]
     [AllowAnonymous]
-    public async Task<ActionResult<UserDTO>> RegisterUser(RegisterUserDTO dto)
+    public async Task<ActionResult<UserDTO>> Register(RegisterUserDTO dto)
     {
         var result = await _usersService.Register(dto);
-        if (result.Success)
-        {
-            return Created("", result);
-        }
-        return BadRequest(new { result.Message });
+        return Created("", result);
     }
 
     [HttpPost]
@@ -66,10 +50,6 @@ public class UsersController : BaseApiController
     public async Task<ActionResult<UserDTO>> Login(LoginDTO dto)
     {
         var result = await _usersService.Login(dto);
-        if (result.Success)
-        {
-            return Ok(result);
-        }
-        return Unauthorized(new { result.Message });
+        return Ok(result);
     }
 }

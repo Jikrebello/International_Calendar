@@ -37,10 +37,6 @@ export class NavBarComponent implements OnInit {
         this.userModel = response?.result as User;
         this.router.navigateByUrl("/dashboard");
       },
-      error: (error) => {
-        const errorMessage = error?.error?.message || "An error occurred";
-        this.toastr.error(errorMessage);
-      },
     });
   }
 

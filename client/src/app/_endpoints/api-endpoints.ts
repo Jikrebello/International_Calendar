@@ -1,4 +1,4 @@
 export enum UsersEndpoints {
   LOGIN = "users/Login",
-  REGISTER = "users/RegisterUser",
+  REGISTER = "users/Register",
 }
