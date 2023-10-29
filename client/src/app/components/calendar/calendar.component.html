@@ -1,1 +1,60 @@
-<p>calendar works!</p>
+<div class="card mt-4">
+  <div class="card-header d-flex justify-content-between align-items-center">
+    <button class="btn btn-primary" (click)="prevMonth()">Prev</button>
+    <span>{{ currentMonth }} {{ currentYear }}</span>
+    <button class="btn btn-primary" (click)="nextMonth()">Next</button>
+  </div>
+
+  <div class="card-body">
+    <table class="table">
+      <thead>
+        <tr>
+          <th class="text-center">Sun</th>
+          <th class="text-center">Mon</th>
+          <th class="text-center">Tue</th>
+          <th class="text-center">Wed</th>
+          <th class="text-center">Thu</th>
+          <th class="text-center">Fri</th>
+          <th class="text-center">Sat</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let week of weeks">
+          <td
+            *ngFor="let day of week"
+            [class.today]="isToday(day)"
+            [class.date-cell]="day !== 0"
+            (click)="onDayClick(day)"
+          >
+            <div>{{ day !== 0 ? day : "" }}</div>
+            <div *ngIf="day !== 0">
+              <small>{{
+                selectedCountries[
+                  currentYear + "-" + (currentDate.getMonth() + 1) + "-" + day
+                ] || "No Country"
+              }}</small>
+            </div>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<div *ngIf="showModal" class="modal">
+  <div class="modal-content">
+    <div class="modal-header">
+      <h4>Select Country</h4>
+      <button class="close-button" (click)="showModal = false">X</button>
+    </div>
+    <div class="modal-body">
+      <select class="wide-dropdown" [(ngModel)]="selectedCountry">
+        <option value="USA">USA</option>
+        <option value="Canada">Canada</option>
+      </select>
+    </div>
+    <div class="modal-footer">
+      <button (click)="saveCountry()">Save</button>
+    </div>
+  </div>
+</div>
