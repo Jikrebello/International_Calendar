@@ -5,9 +5,10 @@ namespace API.DTOs
     public class UserDTO
     {
         public Guid Id { get; set; }
-        public string Name { get; set; }
+        public string FirstName { get; set; }
+        public string LastName { get; set; }
+        public string Bio { get; set; }
 
-        [Required]
         public string EmailAddress { get; set; }
         public string Token { get; set; }
     }
@@ -18,7 +19,10 @@ namespace API.DTOs
         public string EmailAddress { get; set; }
 
         [Required]
-        public string Name { get; set; }
+        public string FirstName { get; set; }
+
+        [Required]
+        public string LastName { get; set; }
 
         [Required]
         [StringLength(maximumLength: 8, MinimumLength = 1)]
@@ -32,5 +36,14 @@ namespace API.DTOs
 
         [Required]
         public string Password { get; set; }
+    }
+
+    public class EditUserDTO
+    {
+        public Guid Id { get; set; }
+
+        public string FirstName { get; set; }
+        public string LastName { get; set; }
+        public string Bio { get; set; }
     }
 }

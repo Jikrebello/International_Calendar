@@ -3,25 +3,31 @@ import { GUID } from "./types";
 
 export interface IUser {
   id: GUID;
-  name: string;
+  firstName: string;
+  lastName: string;
+  bio: string;
   emailAddress: string;
   token: string;
 }
 export class User implements IUser {
   id: GUID = uuidv4();
-  name!: string;
+  firstName!: string;
+  lastName!: string;
+  bio!: string;
   emailAddress!: string;
   token!: string;
 }
 
 export interface IRegisterUser {
   emailAddress: string;
-  name: string;
+  firstName: string;
+  lastName: string;
   password: string;
 }
 export class RegisterUser implements IRegisterUser {
+  firstName!: string;
+  lastName!: string;
   emailAddress!: string;
-  name!: string;
   password!: string;
 }
 
@@ -32,4 +38,18 @@ export interface ILoginUser {
 export class LoginUser implements ILoginUser {
   emailAddress!: string;
   password!: string;
+}
+
+export interface IEditUser {
+  id: GUID;
+  firstName: string;
+  lastName: string;
+  bio: string;
+}
+
+export class EditUser implements IEditUser {
+  id!: GUID;
+  firstName!: string;
+  lastName!: string;
+  bio!: string;
 }

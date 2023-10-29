@@ -1,3 +1,4 @@
+using System.Security.Cryptography;
 using System.Text;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
@@ -11,6 +12,9 @@ namespace API.Extensions
             IConfiguration configuration
         )
         {
+            byte[] key = SHA512.HashData(Encoding.UTF8.GetBytes(configuration["TokenKey"]));
+            var securityKey = new SymmetricSecurityKey(key);
+
             services
                 .AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
                 .AddJwtBearer(options =>
@@ -18,9 +22,7 @@ namespace API.Extensions
                     options.TokenValidationParameters = new TokenValidationParameters
                     {
                         ValidateIssuerSigningKey = true,
-                        IssuerSigningKey = new SymmetricSecurityKey(
-                            Encoding.UTF8.GetBytes(configuration["TokenKey"])
-                        ),
+                        IssuerSigningKey = securityKey,
                         ValidateIssuer = false,
                         ValidateAudience = false
                     };

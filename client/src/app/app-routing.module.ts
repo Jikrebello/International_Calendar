@@ -4,6 +4,7 @@ import { authGuard } from "./_guards/auth.guard";
 import { CalendarComponent } from "./components/calendar/calendar.component";
 import { DashboardComponent } from "./components/dashboard/dashboard.component";
 import { HomeComponent } from "./components/home/home.component";
+import { UserProfileComponent } from "./components/user-profile/user-profile.component";
 import { NotFoundComponent } from "./shared/errors/not-found/not-found.component";
 import { ServerErrorComponent } from "./shared/errors/server-error/server-error.component";
 
@@ -21,6 +22,10 @@ const routes: Routes = [
       {
         path: "calendar",
         component: CalendarComponent,
+      },
+      {
+        path: "user-profile",
+        component: UserProfileComponent,
       },
     ],
   },

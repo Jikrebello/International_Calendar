@@ -4,6 +4,7 @@ import { FormsModule } from "@angular/forms";
 import { BrowserModule } from "@angular/platform-browser";
 import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
 import { ErrorInterceptor } from "./_interceptors/error.interceptor";
+import { JwtInterceptor } from "./_interceptors/jwt.interceptor";
 import { SharedModule } from "./_modules/shared.module";
 import { AppRoutingModule } from "./app-routing.module";
 import { AppComponent } from "./app.component";
@@ -11,9 +12,10 @@ import { CalendarComponent } from "./components/calendar/calendar.component";
 import { DashboardComponent } from "./components/dashboard/dashboard.component";
 import { HomeComponent } from "./components/home/home.component";
 import { RegisterComponent } from "./components/register/register.component";
+import { UserProfileComponent } from "./components/user-profile/user-profile.component";
+import { NotFoundComponent } from "./shared/errors/not-found/not-found.component";
+import { ServerErrorComponent } from "./shared/errors/server-error/server-error.component";
 import { NavBarComponent } from "./shared/nav-bar/nav-bar.component";
-import { NotFoundComponent } from './shared/errors/not-found/not-found.component';
-import { ServerErrorComponent } from './shared/errors/server-error/server-error.component';
 
 @NgModule({
   declarations: [
@@ -25,6 +27,7 @@ import { ServerErrorComponent } from './shared/errors/server-error/server-error.
     CalendarComponent,
     NotFoundComponent,
     ServerErrorComponent,
+    UserProfileComponent,
   ],
   imports: [
     BrowserModule,
@@ -36,6 +39,7 @@ import { ServerErrorComponent } from './shared/errors/server-error/server-error.
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true },
+    { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
   ],
   bootstrap: [AppComponent],
 })

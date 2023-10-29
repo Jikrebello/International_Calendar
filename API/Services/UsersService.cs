@@ -34,7 +34,6 @@ namespace API.Services
                 ?? throw new UsersNotFoundException(message: "User not found.");
 
             var userModel = _mapper.Map<UserDTO>(user);
-            userModel.Token = _tokenService.CreateToken(user);
 
             return new ResultResponse<UserDTO>(
                 success: true,
@@ -50,7 +49,6 @@ namespace API.Services
                 ?? throw new UsersNotFoundException(message: "User not found.");
 
             var userModel = _mapper.Map<UserDTO>(user);
-            userModel.Token = _tokenService.CreateToken(user);
 
             return new ResultResponse<UserDTO>(
                 success: true,
@@ -84,7 +82,8 @@ namespace API.Services
 
             var user = new User
             {
-                Name = dto.Name,
+                FirstName = dto.FirstName,
+                LastName = dto.LastName,
                 EmailAddress = dto.EmailAddress.ToLower(),
                 PasswordHash = hmac.ComputeHash(Encoding.UTF8.GetBytes(dto.Password)),
                 PasswordSalt = hmac.Key
@@ -97,7 +96,7 @@ namespace API.Services
 
             return new ResultResponse<UserDTO>(
                 success: true,
-                message: $"Successfully Registered User: {user.Name} with Email Address: {user.EmailAddress}.",
+                message: $"Successfully Registered User: {user.FirstName} with Email Address: {user.EmailAddress}.",
                 result: userDTO
             );
         }
@@ -127,6 +126,24 @@ namespace API.Services
                 message: "User Logged In.",
                 result: userDTO
             );
+        }
+
+        public async Task<BaseResponse> EditUser(EditUserDTO dto)
+        {
+            var user =
+                await _userRepository.GetByIdAsync(dto.Id)
+                ?? throw new UsersNotFoundException(message: "User not found.");
+
+            if (!string.IsNullOrEmpty(dto.FirstName))
+            {
+                user.FirstName = dto.FirstName;
+            }
+            user.LastName = dto.LastName ?? user.LastName;
+            user.Bio = dto.Bio ?? user.Bio;
+
+            await _userRepository.EditUser(user);
+
+            return new BaseResponse { Success = true, Message = "Successfully Edited User" };
         }
 
         private async Task<bool> UserExists(string emailAddress)

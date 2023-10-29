@@ -28,7 +28,7 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen(c =>
 {
     c.AddSecurityDefinition(
-        "Bearer",
+        name: "Bearer",
         new OpenApiSecurityScheme
         {
             In = ParameterLocation.Header,
@@ -75,6 +75,18 @@ else
         builder => builder.AllowAnyHeader().AllowAnyMethod().WithOrigins("https://localhost:4200")
     );
 }
+
+// Add the CSP middleware here
+app.Use(
+    async (context, next) =>
+    {
+        context.Response.Headers.Add(
+            key: "Content-Security-Policy",
+            value: "default-src 'self'; img-src *; media-src media1.com media2.com; script-src scripts.com"
+        );
+        await next();
+    }
+);
 
 app.UseHttpsRedirection();
 

@@ -35,5 +35,11 @@ namespace API.Repositories
             await _dataContext.Users.AddAsync(model);
             await _dataContext.SaveChangesAsync();
         }
+
+        public async Task EditUser(User user)
+        {
+            _dataContext.Users.Update(user);
+            await _dataContext.SaveChangesAsync();
+        }
     }
 }

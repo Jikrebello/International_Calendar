@@ -1,4 +1,5 @@
 import { Component, OnInit } from "@angular/core";
+import { NgForm } from "@angular/forms";
 import { Router } from "@angular/router";
 import { ToastrService } from "ngx-toastr";
 import { Observable, of } from "rxjs";
@@ -18,8 +19,8 @@ export class NavBarComponent implements OnInit {
 
   constructor(
     public accountService: AccountService,
-    private router: Router,
-    private toastr: ToastrService
+    private toastr: ToastrService,
+    private router: Router
   ) {}
 
   ngOnInit(): void {
@@ -31,13 +32,22 @@ export class NavBarComponent implements OnInit {
     }
   }
 
-  login() {
-    this.accountService.login(this.formModel).subscribe({
-      next: (response) => {
-        this.userModel = response?.result as User;
-        this.router.navigateByUrl("/dashboard");
-      },
-    });
+  login(form: NgForm) {
+    if (form.valid) {
+      this.accountService.login(this.formModel).subscribe({
+        next: (response) => {
+          this.userModel = response?.result as User;
+          this.router.navigateByUrl("/dashboard");
+        },
+      });
+    } else {
+      if (form.controls["emailAddress"]?.invalid) {
+        this.toastr.error("Email is required");
+      }
+      if (form.controls["password"]?.invalid) {
+        this.toastr.error("Password is required");
+      }
+    }
   }
 
   logOut() {

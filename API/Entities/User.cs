@@ -13,7 +13,9 @@ public class User
 
     [Required]
     public string EmailAddress { get; set; }
-    public string Name { get; set; }
+    public string FirstName { get; set; }
+    public string LastName { get; set; }
+    public string Bio { get; set; }
     public byte[] PasswordHash { get; set; }
     public byte[] PasswordSalt { get; set; }
 }

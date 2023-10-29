@@ -1,10 +1,12 @@
 import { HttpClient } from "@angular/common/http";
 import { Injectable } from "@angular/core";
-import { BehaviorSubject, map } from "rxjs";
+import { BehaviorSubject, Observable, map } from "rxjs";
 import { environment } from "src/environments/environment";
-import { UsersEndpoints } from "../_endpoints/api-endpoints";
 import { ResultResponse } from "../_models/responses";
-import { LoginUser, RegisterUser, User } from "../_models/user";
+import { GUID } from "../_models/types";
+import { EditUser, LoginUser, RegisterUser, User } from "../_models/user";
+import { UsersEndpoints } from "./../_endpoints/api-endpoints";
+import { BaseResponse } from "./../_models/responses";
 
 @Injectable({
   providedIn: "root",
@@ -50,6 +52,19 @@ export class AccountService {
           }
         })
       );
+  }
+
+  getUserById(userId: GUID): Observable<ResultResponse<User>> {
+    return this.https.get<ResultResponse<User>>(
+      `${environment.baseUrl}${UsersEndpoints.GET_BY_ID}/${userId}`
+    );
+  }
+
+  editUser(model: EditUser): Observable<BaseResponse> {
+    return this.https.post<BaseResponse>(
+      environment.baseUrl + UsersEndpoints.EDIT_USER,
+      model
+    );
   }
 
   setCurrentUser(user: User) {

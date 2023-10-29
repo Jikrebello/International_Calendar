@@ -52,4 +52,11 @@ public class UsersController : BaseApiController
         var result = await _usersService.Login(dto);
         return Ok(result);
     }
+
+    [HttpPost]
+    public async Task<ActionResult<BaseResponse>> EditUser(EditUserDTO dto)
+    {
+        var result = await _usersService.EditUser(dto);
+        return Ok(result);
+    }
 }

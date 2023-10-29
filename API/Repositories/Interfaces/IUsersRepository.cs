@@ -8,5 +8,6 @@ namespace API.Repositories.Interfaces
         IAsyncEnumerable<User> GetAllAsync();
         Task Register(User model);
         Task<User> GetByEmailAddressAsync(string emailAddress);
+        Task EditUser(User user);
     }
 }

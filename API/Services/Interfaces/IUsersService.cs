@@ -9,5 +9,6 @@ namespace API.Services.Interfaces
         Task<ResultResponse<IEnumerable<UserDTO>>> GetAllAsync();
         Task<ResultResponse<UserDTO>> Register(RegisterUserDTO dto);
         Task<ResultResponse<UserDTO>> Login(LoginDTO dto);
+        Task<BaseResponse> EditUser(EditUserDTO dto);
     }
 }

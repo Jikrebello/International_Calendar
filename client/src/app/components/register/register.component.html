@@ -1,13 +1,28 @@
-<form #registerForm="ngForm" (ngSubmit)="register()" autocomplete="off">
+<form
+  #registerForm="ngForm"
+  (ngSubmit)="register(registerForm)"
+  autocomplete="off"
+>
   <h2 class="text-center text-primary">Sign up</h2>
   <hr />
   <div class="mb-3">
     <input
       type="text"
       class="form-control"
-      name="name"
-      [(ngModel)]="registerModel.name"
-      placeholder="Name"
+      name="firstName"
+      [(ngModel)]="registerModel.firstName"
+      placeholder="First Name"
+      required
+    />
+  </div>
+  <div class="mb-3">
+    <input
+      type="text"
+      class="form-control"
+      name="lastName"
+      [(ngModel)]="registerModel.lastName"
+      placeholder="Last Name"
+      required
     />
   </div>
   <div class="mb-3">
@@ -17,6 +32,7 @@
       name="emailAddress"
       [(ngModel)]="registerModel.emailAddress"
       placeholder="Email Address"
+      required
     />
   </div>
   <div class="mb-3">
@@ -26,6 +42,7 @@
       name="password"
       [(ngModel)]="registerModel.password"
       placeholder="Password"
+      required
     />
   </div>
 
