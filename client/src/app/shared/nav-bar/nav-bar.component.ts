@@ -1,4 +1,6 @@
 import { Component, OnInit } from "@angular/core";
+import { Router } from "@angular/router";
+import { ToastrService } from "ngx-toastr";
 import { Observable, of } from "rxjs";
 import { ResultResponse } from "src/app/_models/responses";
 import { LoginUser, User } from "src/app/_models/user";
@@ -14,7 +16,11 @@ export class NavBarComponent implements OnInit {
   currentUser$: Observable<User | ResultResponse<User> | null> = of(null);
   formModel: LoginUser = new LoginUser();
 
-  constructor(public accountService: AccountService) {}
+  constructor(
+    public accountService: AccountService,
+    private router: Router,
+    private toastr: ToastrService
+  ) {}
 
   ngOnInit(): void {
     this.currentUser$ = this.accountService.currentUser$;
@@ -29,13 +35,17 @@ export class NavBarComponent implements OnInit {
     this.accountService.login(this.formModel).subscribe({
       next: (response) => {
         this.userModel = response?.result as User;
-        console.log(this.userModel);
+        this.router.navigateByUrl("/dashboard");
       },
-      error: (error) => console.log(error),
+      error: (error) => {
+        const errorMessage = error?.error?.message || "An error occurred";
+        this.toastr.error(errorMessage);
+      },
     });
   }
 
   logOut() {
     this.accountService.logout();
+    this.router.navigateByUrl("/");
   }
 }
