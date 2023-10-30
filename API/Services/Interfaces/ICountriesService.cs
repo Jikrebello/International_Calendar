@@ -7,5 +7,8 @@ namespace API.Services.Interfaces
         Task<ResultResponse<IEnumerable<CountryDTO>>> GetAll();
         Task<BaseResponse> SaveVisits(CountryVisitsDTO dto);
         Task<ResultResponse<CountryVisitsDTO>> GetVisitsByUserId(Guid userId);
+        Task<ResultResponse<List<UserCountryVisitSummaryDTO>>> GetUserCountryVisitSummary(
+            Guid userId
+        );
     }
 }

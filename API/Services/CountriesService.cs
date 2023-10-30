@@ -3,6 +3,7 @@ using API.Entities;
 using API.Repositories.Interfaces;
 using API.Services.Interfaces;
 using AutoMapper;
+using Microsoft.EntityFrameworkCore;
 
 namespace API.Services
 {
@@ -123,6 +124,41 @@ namespace API.Services
                 success: true,
                 message: "Visits fetched successfully.",
                 result: dto
+            );
+        }
+
+        public async Task<
+            ResultResponse<List<UserCountryVisitSummaryDTO>>
+        > GetUserCountryVisitSummary(Guid userId)
+        {
+            var groupedVisits = await _countriesRepository
+                .GetAllUserCountryVisitsAsync()
+                .Where(x => x.UserId == userId)
+                .GroupBy(x => new { x.UserId, x.CountryId })
+                .ToListAsync();
+
+            var report = new List<UserCountryVisitSummaryDTO>();
+
+            foreach (var group in groupedVisits)
+            {
+                var countryName = group.Max(x => x.Country?.Name ?? "Unknown");
+
+                var visitCount = group.Count();
+                report.Add(
+                    new UserCountryVisitSummaryDTO
+                    {
+                        UserId = group.Key.UserId,
+                        CountryId = group.Key.CountryId,
+                        CountryName = countryName,
+                        VisitCount = visitCount
+                    }
+                );
+            }
+
+            return new ResultResponse<List<UserCountryVisitSummaryDTO>>(
+                success: true,
+                message: "Retrieved Visit Summary",
+                report
             );
         }
     }

@@ -25,6 +25,7 @@ export class UserProfileComponent {
       const user = JSON.parse(userString) as User;
       this.formModel.id = user.id;
     }
+
     this.accountService.getUserById(this.formModel.id).subscribe({
       next: (response) => {
         this.formModel.firstName = response.result.firstName;

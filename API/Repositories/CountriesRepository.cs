@@ -18,9 +18,9 @@ namespace API.Repositories
             return _dataContext.Countries.AsNoTracking().AsAsyncEnumerable();
         }
 
-        public IAsyncEnumerable<UserCountryVisit> GetAllUserCountryVisitsAsync()
+        public IQueryable<UserCountryVisit> GetAllUserCountryVisitsAsync()
         {
-            return _dataContext.UserCountryVisits.AsNoTracking().AsAsyncEnumerable();
+            return _dataContext.UserCountryVisits.Include(u => u.Country).AsNoTracking();
         }
 
         public async Task InsertCountryVisit(UserCountryVisit visit)

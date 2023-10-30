@@ -1,1 +1,23 @@
-<p>dashboard works!</p>
+<div>
+  <h1>Country Visit Summary</h1>
+  <table
+    *ngIf="userCountryVisitSummaries.length > 0; else noRecords"
+    class="table"
+  >
+    <thead>
+      <tr>
+        <th>Country Name</th>
+        <th>Visit Count</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let summary of userCountryVisitSummaries">
+        <td>{{ summary.countryName }}</td>
+        <td>{{ summary.visitCount }}</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+<ng-template #noRecords>
+  <p>No Records</p>
+</ng-template>

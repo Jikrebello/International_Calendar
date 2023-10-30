@@ -5,7 +5,7 @@ namespace API.Repositories.Interfaces
     public interface ICountriesRepository
     {
         IAsyncEnumerable<Country> GetAllCountriesAsync();
-        IAsyncEnumerable<UserCountryVisit> GetAllUserCountryVisitsAsync();
+        IQueryable<UserCountryVisit> GetAllUserCountryVisitsAsync();
         Task InsertCountryVisit(UserCountryVisit visit);
         Task<UserCountryVisit> GetVisitsByUserIdAndDateAndCountryId(
             Guid userId,

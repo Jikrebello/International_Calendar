@@ -23,11 +23,20 @@ namespace API.Controllers
         }
 
         [HttpGet(template: "{userId}")]
-        public async Task<ActionResult<ResultResponse<CountryVisitsDTO>>> GetVisitsByUserId(
+        public async Task<ActionResult<ResultResponse<List<CountryVisitsDTO>>>> GetVisitsByUserId(
             Guid userId
         )
         {
             var result = await _countriesService.GetVisitsByUserId(userId);
+            return Ok(result);
+        }
+
+        [HttpGet(template: "{userId}")]
+        public async Task<
+            ActionResult<ResultResponse<CountryVisitsDTO>>
+        > GetUserCountryVisitSummary(Guid userId)
+        {
+            var result = await _countriesService.GetUserCountryVisitSummary(userId);
             return Ok(result);
         }
 

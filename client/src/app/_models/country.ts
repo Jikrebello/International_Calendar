@@ -13,7 +13,21 @@ export interface ICountryVisits {
   selectedCountries: { [key: string]: string[] };
 }
 
-export class CountryVisits {
+export class CountryVisits implements ICountryVisits {
   userId!: string;
   selectedCountries!: { [key: string]: string[] };
+}
+
+export interface IUserCountryVisitSummary {
+  userId: string;
+  countryId: number;
+  countryName: string;
+  visitCount: number;
+}
+
+export class UserCountryVisitSummary implements IUserCountryVisitSummary {
+  userId!: string;
+  countryId!: number;
+  countryName!: string;
+  visitCount!: number;
 }
