@@ -8,6 +8,7 @@ namespace API.Extensions
         public static IServiceCollection AddRepositories(this IServiceCollection services)
         {
             services.AddScoped<IUsersRepository, UsersRepository>();
+            services.AddScoped<ICountriesRepository, CountriesRepository>();
 
             return services;
         }

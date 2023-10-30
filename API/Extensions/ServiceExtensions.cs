@@ -9,6 +9,7 @@ namespace API.Extensions
         {
             services.AddScoped<IUsersService, UsersService>();
             services.AddScoped<ITokenService, TokenService>();
+            services.AddScoped<ICountriesService, CountriesService>();
 
             return services;
         }

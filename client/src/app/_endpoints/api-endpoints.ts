@@ -4,3 +4,9 @@ export enum UsersEndpoints {
   REGISTER = "users/Register",
   EDIT_USER = "users/EditUser",
 }
+
+export enum CountriesEndpoints {
+  GET_ALL_COUNTRIES = "countries/GetAllCountries",
+  GET_VISITS_BY_USERID = "countries/GetVisitsByUserId",
+  SAVE_VISITS = "countries/SaveVisits",
+}

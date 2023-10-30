@@ -17,6 +17,7 @@ import { UserProfileComponent } from "./components/user-profile/user-profile.com
 import { NotFoundComponent } from "./shared/errors/not-found/not-found.component";
 import { ServerErrorComponent } from "./shared/errors/server-error/server-error.component";
 import { NavBarComponent } from "./shared/nav-bar/nav-bar.component";
+import { FilterCountriesPipe } from './pipes/filter-countries.pipe';
 
 @NgModule({
   declarations: [
@@ -29,6 +30,7 @@ import { NavBarComponent } from "./shared/nav-bar/nav-bar.component";
     NotFoundComponent,
     ServerErrorComponent,
     UserProfileComponent,
+    FilterCountriesPipe,
   ],
   imports: [
     BrowserModule,

@@ -24,15 +24,22 @@
             *ngFor="let day of week"
             [class.today]="isToday(day)"
             [class.date-cell]="day !== 0"
+            [class.country-visit]="
+              hasVisit(currentYear, currentDate.getMonth() + 1, day)
+            "
             (click)="onDayClick(day)"
           >
             <div>{{ day !== 0 ? day : "" }}</div>
             <div *ngIf="day !== 0">
-              <small>{{
-                selectedCountries[
-                  currentYear + "-" + (currentDate.getMonth() + 1) + "-" + day
-                ] || "No Country"
-              }}</small>
+              <div *ngIf="day !== 0">
+                <small>{{
+                  getCountryForDate(
+                    currentYear,
+                    currentDate.getMonth() + 1,
+                    day
+                  )
+                }}</small>
+              </div>
             </div>
           </td>
         </tr>
@@ -47,14 +54,23 @@
       <h4>Select Country</h4>
       <button class="close-button" (click)="showModal = false">X</button>
     </div>
+    <input
+      [(ngModel)]="filterText"
+      placeholder="Search countries..."
+      class="form-control mb-2"
+    />
     <div class="modal-body">
-      <select class="wide-dropdown" [(ngModel)]="selectedCountry">
-        <option value="USA">USA</option>
-        <option value="Canada">Canada</option>
-      </select>
+      <div
+        class="dropdown-item"
+        *ngFor="let country of countries | filterCountries : filterText"
+        [class.active]="isSelected(country.name)"
+        (click)="toggleSelection(country.name)"
+      >
+        {{ country.name }}
+      </div>
     </div>
     <div class="modal-footer">
-      <button (click)="saveCountry()">Save</button>
+      <button class="btn btn-primary" (click)="saveCountry()">Save</button>
     </div>
   </div>
 </div>

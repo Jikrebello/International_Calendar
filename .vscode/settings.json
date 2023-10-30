@@ -8,6 +8,7 @@
     "hmac",
     "HMACSHA",
     "toastr",
+    "USERID",
     "uuidv"
   ],
   "files.exclude": {
