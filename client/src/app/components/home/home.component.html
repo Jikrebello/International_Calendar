@@ -1,4 +1,14 @@
 <div class="container mt-5">
+  <div style="text-align: center">
+    <h1>Welcome to International Calendar</h1>
+    <div class="text-center">
+      <p>Go to the dashboard to see your stats.</p>
+      <p>Go to the calendar to mark your days.</p>
+      <p>Go to the calendar to mark your days.</p>
+      Click on Welcome to Logout or Edit your profile
+    </div>
+  </div>
+
   <div
     *ngIf="(accountService.currentUser$ | async) === null && !registerMode"
     style="text-align: center"
